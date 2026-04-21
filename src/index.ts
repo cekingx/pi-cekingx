@@ -68,8 +68,8 @@ export default function (pi: any) {
       },
       required: ["question"],
     },
-    execute: async (_toolCallId: string, params: { question: string; context?: string }) => {
-      const text = await callAdvisor(APERTURE_BASE, params.question, params.context);
+    execute: async (_toolCallId: string, params: { question: string; context?: string }, signal: AbortSignal) => {
+      const text = await callAdvisor(APERTURE_BASE, params.question, params.context, signal);
       return { content: [{ type: "text", text }] };
     },
   });

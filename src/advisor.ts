@@ -5,7 +5,8 @@ import { MODEL_ADVISOR } from "./index.js";
 export async function callAdvisor(
   apertureBase: string,
   question: string,
-  context?: string
+  context?: string,
+  signal?: AbortSignal
 ): Promise<string> {
   const model: Model<"openai-completions"> = {
     id: MODEL_ADVISOR,
@@ -57,7 +58,7 @@ export async function callAdvisor(
 
   const piContext: Context = { messages };
 
-  const result = await completeSimple(model, piContext, { apiKey: "-", maxTokens: 8192 });
+  const result = await completeSimple(model, piContext, { apiKey: "-", maxTokens: 8192, signal });
 
   if (result.stopReason === "error" || result.stopReason === "aborted") {
     throw new Error(`Advisor call failed: ${result.errorMessage ?? "unknown error"}`);
