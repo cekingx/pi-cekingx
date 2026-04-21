@@ -2,7 +2,7 @@ import { callAdvisor } from "./advisor.js";
 
 const APERTURE_BASE = "http://cekingx-ai.longhair-sole.ts.net";
 
-export const MODEL_EXECUTOR = "minimax/minimax-m2.7";
+export const MODEL_EXECUTOR = "deepseek/deepseek-v3.2";
 export const MODEL_ADVISOR  = "google/gemini-3.1-pro-preview";
 
 export default function (pi: any) {
