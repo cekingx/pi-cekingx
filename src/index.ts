@@ -1,69 +1,19 @@
+import { callAdvisor } from "./advisor.js";
+
+const APERTURE_BASE = "http://cekingx-ai.longhair-sole.ts.net";
+
+export const MODEL_EXECUTOR = "minimax/minimax-m2.7";
+export const MODEL_ADVISOR  = "google/gemini-3.1-pro-preview";
+
 export default function (pi: any) {
-  const apertureBase = "http://cekingx-ai.longhair-sole.ts.net";
-
-  pi.registerProvider("anthropic", {
-    baseUrl: apertureBase,
-    apiKey: "-",
-    api: "anthropic-messages",
-    models: [
-      {
-        id: "anthropic/claude-opus-4.6",
-        name: "Claude Opus 4.6 (Aperture)",
-        reasoning: false,
-        input: ["text"],
-        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-        contextWindow: 200000,
-        maxTokens: 32000,
-      },
-    ],
-  });
-
-  pi.registerProvider("anthropic", {
-    baseUrl: apertureBase,
-    apiKey: "-",
-    api: "anthropic-messages",
-    models: [
-      {
-        id: "anthropic/claude-sonnet-4.6",
-        name: "Claude Sonnet 4.6 (Aperture)",
-        reasoning: false,
-        input: ["text"],
-        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-        contextWindow: 200000,
-        maxTokens: 32000,
-      },
-    ],
-  });
-
-  pi.registerProvider("deepseek-aperture", {
-    baseUrl: apertureBase + "/v1",
+  pi.registerProvider("executor", {
+    baseUrl: APERTURE_BASE + "/v1",
     apiKey: "-",
     api: "openai-completions",
     models: [
       {
-        id: "deepseek/deepseek-v3.2",
-        name: "DeepSeek 3.2 (Aperture)",
-        reasoning: false,
-        input: ["text"],
-        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-        contextWindow: 128000,
-        maxTokens: 8192,
-        compat: {
-          supportsDeveloperRole: false,
-          maxTokensField: "max_tokens",
-        },
-      },
-    ],
-  });
-
-  pi.registerProvider("minimax-aperture", {
-    baseUrl: apertureBase + "/v1",
-    apiKey: "-",
-    api: "openai-completions",
-    models: [
-      {
-        id: "minimax/minimax-m2.7",
-        name: "MiniMax M2.7 (Aperture)",
+        id: MODEL_EXECUTOR,
+        name: MODEL_EXECUTOR,
         reasoning: false,
         input: ["text"],
         cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
@@ -77,16 +27,16 @@ export default function (pi: any) {
     ],
   });
 
-  pi.registerProvider("gemini-aperture", {
-    baseUrl: apertureBase + "/v1",
+  pi.registerProvider("advisor", {
+    baseUrl: APERTURE_BASE + "/v1",
     apiKey: "-",
     api: "openai-completions",
     models: [
       {
-        id: "google/gemini-3.1-pro-preview",
-        name: "Gemini 3.1 Pro Preview (Aperture)",
+        id: MODEL_ADVISOR,
+        name: MODEL_ADVISOR,
         reasoning: false,
-        input: ["text", "image"],
+        input: ["text"],
         cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
         contextWindow: 1000000,
         maxTokens: 8192,
@@ -96,5 +46,30 @@ export default function (pi: any) {
         },
       },
     ],
+  });
+
+  pi.registerTool({
+    name: "ask_advisor",
+    description:
+      `Consult ${MODEL_ADVISOR} for high-level reasoning, planning, or decisions ` +
+      `that require deeper intelligence. Use this when you are unsure about an approach, ` +
+      `need a second opinion, or the task involves significant complexity or risk.`,
+    parameters: {
+      type: "object",
+      properties: {
+        question: {
+          type: "string",
+          description: "The question or problem to send to the advisor.",
+        },
+        context: {
+          type: "string",
+          description: "Relevant background context the advisor needs to answer well.",
+        },
+      },
+      required: ["question"],
+    },
+    execute: async (params: { question: string; context?: string }) => {
+      return callAdvisor(APERTURE_BASE, params.question, params.context);
+    },
   });
 }
