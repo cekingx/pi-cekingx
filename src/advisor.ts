@@ -5,8 +5,8 @@ import { MODEL_ADVISOR } from "./index.js";
 export async function callAdvisor(
   apertureBase: string,
   question: string,
+  signal: AbortSignal,
   context?: string,
-  signal?: AbortSignal
 ): Promise<string> {
   const model: Model<"openai-completions"> = {
     id: MODEL_ADVISOR,

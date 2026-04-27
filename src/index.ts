@@ -16,8 +16,8 @@ export default function (pi: any) {
         name: MODEL_EXECUTOR,
         reasoning: false,
         input: ["text"],
-        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-        contextWindow: 1000000,
+        cost: { input: 0.95, output: 4, cacheRead: 0.16, cacheWrite: 0 },
+        contextWindow: 262000,
         maxTokens: 8192,
         compat: {
           supportsDeveloperRole: false,
@@ -69,7 +69,7 @@ export default function (pi: any) {
       required: ["question"],
     },
     execute: async (_toolCallId: string, params: { question: string; context?: string }, signal: AbortSignal) => {
-      const text = await callAdvisor(APERTURE_BASE, params.question, params.context, signal);
+      const text = await callAdvisor(APERTURE_BASE, params.question, signal, params.context);
       return { content: [{ type: "text", text }] };
     },
   });
