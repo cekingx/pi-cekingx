@@ -3,7 +3,7 @@ import { callAdvisor } from "./advisor.js";
 const APERTURE_BASE = "http://cekingx-ai.longhair-sole.ts.net";
 
 export const MODEL_EXECUTOR = "accounts/fireworks/models/kimi-k2p6";
-export const MODEL_ADVISOR  = "accounts/fireworks/models/deepseek-v4-pro";
+export const MODEL_ADVISOR  = "google/gemini-3.1-pro-preview";
 
 export default function (pi: any) {
   pi.registerProvider("executor", {
@@ -18,11 +18,6 @@ export default function (pi: any) {
         input: ["text"],
         cost: { input: 0.95, output: 4, cacheRead: 0.16, cacheWrite: 0 },
         contextWindow: 262000,
-        maxTokens: 8192,
-        compat: {
-          supportsDeveloperRole: false,
-          maxTokensField: "max_tokens",
-        },
       },
     ],
   });
@@ -37,13 +32,8 @@ export default function (pi: any) {
         name: MODEL_ADVISOR,
         reasoning: false,
         input: ["text"],
-        cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+        cost: { input: 2, output: 12, cacheRead: 0.2, cacheWrite: 0.375 },
         contextWindow: 1000000,
-        maxTokens: 8192,
-        compat: {
-          supportsDeveloperRole: false,
-          maxTokensField: "max_tokens",
-        },
       },
     ],
   });
