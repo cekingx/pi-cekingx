@@ -23,12 +23,12 @@ export const KIMI_K26_FIREWORKS: Model<'openai-completions'> = {
 export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
   id: "gemini-3.1-pro-preview",
   name: "gemini-3.1-pro-preview",
-  provider: 'advisor',
+  provider: 'tailscale-aperture',
   baseUrl: APERTURE_BASE + "/v1beta",
   api: 'google-generative-ai',
-  reasoning: false,
+  reasoning: true,
   input: ["text"],
-  cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+  cost: { input: 2, output: 12, cacheRead: 0, cacheWrite: 0 },
   contextWindow: 1000000,
   maxTokens: 8192,
 }
@@ -43,7 +43,6 @@ export default function (pi: any) {
   pi.registerProvider("advisor", {
     apiKey: "-",
     baseUrl: APERTURE_BASE + "/v1beta",
-    api: 'google-generative-ai',
     models: [GEMINI_31_PRO_AI_STUDIO]
   });
 
