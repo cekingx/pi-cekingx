@@ -43,6 +43,7 @@ export default function (pi: any) {
   pi.registerProvider("advisor", {
     apiKey: "-",
     baseUrl: APERTURE_BASE,
+    api: 'google-generative-ai',
     models: [GEMINI_31_PRO_AI_STUDIO]
   });
 
