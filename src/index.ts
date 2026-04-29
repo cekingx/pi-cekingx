@@ -36,11 +36,13 @@ export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
 export default function (pi: any) {
   pi.registerProvider("executor", {
     apiKey: "-",
+    baseUrl: APERTURE_BASE + "/v1",
     models: [KIMI_K26_FIREWORKS]
   });
 
   pi.registerProvider("advisor", {
     apiKey: "-",
+    baseUrl: APERTURE_BASE,
     models: [GEMINI_31_PRO_AI_STUDIO]
   });
 
