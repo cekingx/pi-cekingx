@@ -1,30 +1,12 @@
 import { completeSimple } from "@mariozechner/pi-ai";
 import type { Model, Context, UserMessage, AssistantMessage } from "@mariozechner/pi-ai";
-import { MODEL_ADVISOR } from "./index.js";
+import { GEMINI_31_PRO_AI_STUDIO } from "./index.js";
 
 export async function callAdvisor(
-  apertureBase: string,
   question: string,
   signal: AbortSignal,
   context?: string,
 ): Promise<string> {
-  const model: Model<"openai-completions"> = {
-    id: MODEL_ADVISOR,
-    name: "Gemini 3.1 Pro Preview (Aperture)",
-    api: "openai-completions",
-    provider: "gemini-aperture",
-    baseUrl: apertureBase + "/v1",
-    reasoning: false,
-    input: ["text"],
-    cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
-    contextWindow: 1000000,
-    maxTokens: 8192,
-    compat: {
-      supportsDeveloperRole: false,
-      maxTokensField: "max_tokens",
-    },
-  };
-
   const messages: (UserMessage | AssistantMessage)[] = [];
 
   if (context) {
@@ -32,9 +14,9 @@ export async function callAdvisor(
     messages.push({
       role: "assistant",
       content: [{ type: "text", text: "Understood. What is your question?" }],
-      api: "openai-completions",
+      api: "google-generative-ai",
       provider: "gemini-aperture",
-      model: MODEL_ADVISOR,
+      model: GEMINI_31_PRO_AI_STUDIO.id,
       usage: {
         input: 0,
         output: 0,
@@ -58,7 +40,7 @@ export async function callAdvisor(
 
   const piContext: Context = { messages };
 
-  const result = await completeSimple(model, piContext, { apiKey: "-", maxTokens: 8192, signal });
+  const result = await completeSimple(GEMINI_31_PRO_AI_STUDIO, piContext, { apiKey: "-", maxTokens: 8192, signal });
 
   if (result.stopReason === "error" || result.stopReason === "aborted") {
     throw new Error(`Advisor call failed: ${result.errorMessage ?? "unknown error"}`);
