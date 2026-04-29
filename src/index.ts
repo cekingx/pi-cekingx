@@ -24,7 +24,7 @@ export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
   id: "gemini-3.1-pro-preview",
   name: "gemini-3.1-pro-preview",
   provider: 'advisor',
-  baseUrl: APERTURE_BASE,
+  baseUrl: APERTURE_BASE + "/v1beta",
   api: 'google-generative-ai',
   reasoning: false,
   input: ["text"],
@@ -42,7 +42,7 @@ export default function (pi: any) {
 
   pi.registerProvider("advisor", {
     apiKey: "-",
-    baseUrl: APERTURE_BASE,
+    baseUrl: APERTURE_BASE + "/v1beta",
     api: 'google-generative-ai',
     models: [GEMINI_31_PRO_AI_STUDIO]
   });
