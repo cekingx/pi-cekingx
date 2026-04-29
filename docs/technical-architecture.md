@@ -25,7 +25,7 @@ Aperture acts as a unified API gateway, translating provider-specific protocols 
 | `anthropic`         | `anthropic-messages` | (none)      | claude-opus-4.6, claude-sonnet-4.6 |
 | `deepseek-aperture` | `openai-completions` | `/v1`       | deepseek-v3.2                   |
 | `minimax-aperture`  | `openai-completions` | `/v1`       | minimax-m2.7                    |
-| `gemini-aperture`   | `openai-completions` | `/v1`       | gemini-3.1-pro-preview          |
+| `advisor`           | `google-generative-ai` | (none)      | gemini-3.1-pro-preview          |
 
 ---
 
@@ -54,7 +54,7 @@ User
 │                                     │
 │  Sends question + context to        │
 │  MODEL_ADVISOR (gemini-3.1-pro)     │
-│  via Aperture (openai-completions)  │
+│  via Aperture (google-generative-ai)│
 └──────────────┬──────────────────────┘
                │ returns advice as text
                ▼
@@ -64,8 +64,8 @@ User
 ### Constants
 
 ```
-MODEL_EXECUTOR  =  minimax/minimax-m2.7          (default active model)
-MODEL_ADVISOR   =  google/gemini-3.1-pro-preview  (consulted on demand)
+MODEL_EXECUTOR  =  accounts/fireworks/models/kimi-k2p6  (default active model)
+MODEL_ADVISOR   =  gemini-3.1-pro-preview              (consulted on demand)
 ```
 
 ### When the Executor Should Call ask_advisor
@@ -89,8 +89,8 @@ Returns:     plain text advice from MODEL_ADVISOR
 ### Advisor Call Flow
 
 1. Executor decides it needs advice and calls `ask_advisor`
-2. Tool constructs a single-turn Anthropic Messages API request to MODEL_ADVISOR
-3. Request is sent directly to Aperture (`openai-completions` protocol, `/v1` suffix)
+2. Tool constructs a single-turn Google Generative AI request to MODEL_ADVISOR
+3. Request is sent directly to Aperture (`google-generative-ai` protocol)
 4. Advisor response is returned as the tool result
 5. Executor incorporates the advice and continues
 

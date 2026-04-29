@@ -23,7 +23,7 @@ export const KIMI_K26_FIREWORKS: Model<'openai-completions'> = {
 export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
   id: "gemini-3.1-pro-preview",
   name: "gemini-3.1-pro-preview",
-  provider: 'tailscale-aperture',
+  provider: 'advisor',
   baseUrl: APERTURE_BASE,
   api: 'google-generative-ai',
   reasoning: false,

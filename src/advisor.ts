@@ -14,8 +14,8 @@ export async function callAdvisor(
     messages.push({
       role: "assistant",
       content: [{ type: "text", text: "Understood. What is your question?" }],
-      api: "google-generative-ai",
-      provider: "gemini-aperture",
+      api: GEMINI_31_PRO_AI_STUDIO.api,
+      provider: GEMINI_31_PRO_AI_STUDIO.provider,
       model: GEMINI_31_PRO_AI_STUDIO.id,
       usage: {
         input: 0,
