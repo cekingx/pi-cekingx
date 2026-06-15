@@ -24,7 +24,7 @@ export const KIMI_K27_FIREWORKS: Model<'openai-completions'> = {
   id: "accounts/fireworks/models/kimi-k2p7-code",
   name: "accounts/fireworks/models/kimi-k2p7-code",
   provider: 'tailscale-aperture',
-  baseUrl: APERTURE_BASE + "/v1",
+  baseUrl: APERTURE_BASE,
   api: "openai-completions",
   reasoning: false,
   input: ["text"],
