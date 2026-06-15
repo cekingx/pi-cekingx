@@ -26,7 +26,7 @@ export const KIMI_K27_FIREWORKS: Model<'openai-completions'> = {
   provider: 'tailscale-aperture',
   baseUrl: APERTURE_BASE,
   api: "openai-completions",
-  reasoning: false,
+  reasoning: true,
   input: ["text"],
   cost: { input: 0.95, output: 4, cacheRead: 0.19, cacheWrite: 0 },
   contextWindow: 262000,
