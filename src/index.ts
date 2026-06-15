@@ -20,6 +20,23 @@ export const KIMI_K26_FIREWORKS: Model<'openai-completions'> = {
   },
 }
 
+export const KIMI_K27_FIREWORKS: Model<'openai-completions'> = {
+  id: "accounts/fireworks/models/kimi-k2p7-code",
+  name: "accounts/fireworks/models/kimi-k2p7-code",
+  provider: 'tailscale-aperture',
+  baseUrl: APERTURE_BASE + "/v1",
+  api: "openai-completions",
+  reasoning: false,
+  input: ["text"],
+  cost: { input: 0.95, output: 4, cacheRead: 0.19, cacheWrite: 0 },
+  contextWindow: 262000,
+  maxTokens: 8192,
+  compat: {
+    supportsDeveloperRole: false,
+    maxTokensField: "max_tokens",
+  },
+}
+
 export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
   id: "gemini-3.1-pro-preview",
   name: "gemini-3.1-pro-preview",
@@ -37,7 +54,7 @@ export default function (pi: any) {
   pi.registerProvider("executor", {
     apiKey: "-",
     baseUrl: APERTURE_BASE + "/v1",
-    models: [KIMI_K26_FIREWORKS]
+    models: [KIMI_K27_FIREWORKS]
   });
 
   pi.registerProvider("advisor", {
