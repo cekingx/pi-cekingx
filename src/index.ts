@@ -53,7 +53,7 @@ export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
 export default function (pi: any) {
   pi.registerProvider("executor", {
     apiKey: "-",
-    baseUrl: APERTURE_BASE + "/v1",
+    baseUrl: APERTURE_BASE,
     models: [KIMI_K27_FIREWORKS]
   });
 
