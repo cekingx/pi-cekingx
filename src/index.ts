@@ -1,5 +1,5 @@
 import { callAdvisor } from "./advisor.js";
-import type { Model } from "@mariozechner/pi-ai";
+import type { Model } from "@earendil-works/pi-ai";
 
 const APERTURE_BASE = "http://cekingx-ai.longhair-sole.ts.net";
 
@@ -57,35 +57,35 @@ export default function (pi: any) {
     models: [KIMI_K27_FIREWORKS]
   });
 
-  pi.registerProvider("advisor", {
-    apiKey: "-",
-    baseUrl: APERTURE_BASE + "/v1beta",
-    models: [GEMINI_31_PRO_AI_STUDIO]
-  });
-
-  pi.registerTool({
-    name: "ask_advisor",
-    description:
-      `Consult advisor for high-level reasoning, planning, or decisions ` +
-      `that require deeper intelligence. Use this when you are unsure about an approach, ` +
-      `need a second opinion, or the task involves significant complexity or risk.`,
-    parameters: {
-      type: "object",
-      properties: {
-        question: {
-          type: "string",
-          description: "The question or problem to send to the advisor.",
-        },
-        context: {
-          type: "string",
-          description: "Relevant background context the advisor needs to answer well.",
-        },
-      },
-      required: ["question"],
-    },
-    execute: async (_toolCallId: string, params: { question: string; context?: string }, signal: AbortSignal) => {
-      const text = await callAdvisor(params.question, signal, params.context);
-      return { content: [{ type: "text", text }] };
-    },
-  });
+  // pi.registerProvider("advisor", {
+  //   apiKey: "-",
+  //   baseUrl: APERTURE_BASE + "/v1beta",
+  //   models: [GEMINI_31_PRO_AI_STUDIO]
+  // });
+  //
+  // pi.registerTool({
+  //   name: "ask_advisor",
+  //   description:
+  //     `Consult advisor for high-level reasoning, planning, or decisions ` +
+  //     `that require deeper intelligence. Use this when you are unsure about an approach, ` +
+  //     `need a second opinion, or the task involves significant complexity or risk.`,
+  //   parameters: {
+  //     type: "object",
+  //     properties: {
+  //       question: {
+  //         type: "string",
+  //         description: "The question or problem to send to the advisor.",
+  //       },
+  //       context: {
+  //         type: "string",
+  //         description: "Relevant background context the advisor needs to answer well.",
+  //       },
+  //     },
+  //     required: ["question"],
+  //   },
+  //   execute: async (_toolCallId: string, params: { question: string; context?: string }, signal: AbortSignal) => {
+  //     const text = await callAdvisor(params.question, signal, params.context);
+  //     return { content: [{ type: "text", text }] };
+  //   },
+  // });
 }
