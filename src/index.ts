@@ -37,6 +37,23 @@ export const KIMI_K27_FIREWORKS: Model<'openai-completions'> = {
   },
 }
 
+export const GLM_52_FIREWORKS: Model<'openai-completions'> = {
+  id: "accounts/fireworks/models/glm-5p2",
+  name: "accounts/fireworks/models/glm-5p2",
+  provider: 'tailscale-aperture',
+  baseUrl: APERTURE_BASE,
+  api: "openai-completions",
+  reasoning: true,
+  input: ["text"],
+  cost: { input: 1.40, output: 4.40, cacheRead: 0.14, cacheWrite: 0 },
+  contextWindow: 1_000_000,
+  maxTokens: 8192,
+  compat: {
+    supportsDeveloperRole: false,
+    maxTokensField: "max_tokens",
+  },
+}
+
 export const GEMINI_31_PRO_AI_STUDIO: Model<'google-generative-ai'> = {
   id: "gemini-3.1-pro-preview",
   name: "gemini-3.1-pro-preview",
