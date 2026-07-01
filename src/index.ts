@@ -71,7 +71,7 @@ export default function (pi: any) {
   pi.registerProvider("executor", {
     apiKey: "-",
     baseUrl: APERTURE_BASE,
-    models: [KIMI_K27_FIREWORKS]
+    models: [GLM_52_FIREWORKS]
   });
 
   // pi.registerProvider("advisor", {
