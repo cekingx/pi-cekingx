@@ -37,6 +37,23 @@ export const KIMI_K27_FIREWORKS: Model<'openai-completions'> = {
   },
 }
 
+export const KIMI_K3_FIREWORKS: Model<'openai-completions'> = {
+  id: "accounts/fireworks/models/kimi-k3",
+  name: "accounts/fireworks/models/kimi-k3",
+  provider: 'tailscale-aperture',
+  baseUrl: APERTURE_BASE,
+  api: "openai-completions",
+  reasoning: true,
+  input: ["text"],
+  cost: { input: 3.00, output: 15, cacheRead: 0.30, cacheWrite: 0 },
+  contextWindow: 1_000_000,
+  maxTokens: 8192,
+  compat: {
+    supportsDeveloperRole: false,
+    maxTokensField: "max_tokens",
+  },
+}
+
 export const GLM_52_FIREWORKS: Model<'openai-completions'> = {
   id: "accounts/fireworks/models/glm-5p2",
   name: "accounts/fireworks/models/glm-5p2",
@@ -71,7 +88,7 @@ export default function (pi: any) {
   pi.registerProvider("executor", {
     apiKey: "-",
     baseUrl: APERTURE_BASE,
-    models: [GLM_52_FIREWORKS]
+    models: [KIMI_K3_FIREWORKS]
   });
 
   // pi.registerProvider("advisor", {
